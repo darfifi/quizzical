@@ -1,0 +1,121 @@
+#root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main--container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.main--page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 750px;
+    height: 750px;
+    background-color: rgba(245, 247, 251, 1);
+    position: relative;
+}
+
+.main--page--title {
+    font-size: 31px;
+    font-family: "Karla";
+    font-weight: 700;
+    color: rgba(41, 50, 100, 1);
+    margin-bottom: 7px;
+}
+
+.main--page--free--text {
+    color: rgba(41, 50, 100, 1);
+    font-family: "Inter";
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 29px;
+}
+
+.my--button {
+    background-color: rgba(77, 91, 158, 1);
+    font-family: "Inter";
+    color: rgba(245, 247, 251, 1);
+    font-weight: 500;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.image--up {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.image--down {
+    position: absolute;
+    top: 632px;
+    left: 0;
+}
+
+.question--container {
+    width: 550px;
+    
+    border-bottom: 0.75px solid lightgray;
+    padding-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-top: 40px;
+}
+
+.question {
+    font-family: 'Karla';
+    font-weight: 700;
+    font-size: 16px;
+    color: rgba(41, 50, 100, 1);
+    margin-bottom: 12px;
+    margin-top: 0;
+    width: 550px;
+}
+
+.answer {
+    display: inline;
+    border: 0.79px solid rgba(77, 91, 158, 1);
+    color: rgba(41, 50, 100, 1);
+    border-radius: 8px;
+    font-size: 10px;
+    font-family: 'Inter';
+    font-weight: 500;
+    padding: 4px 8px;
+    margin-right: 13px;
+    cursor: pointer;
+}
+
+.answer--result {
+    background-color: lightgreen;
+}
+
+.answers--container {
+    display: flex;
+    justify-content: center;
+}
+
+.display--results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.result {
+    font-size: 13px;
+    font-family: 'Inter';
+    font-weight: 700;
+    color: rgba(41, 50, 100, 1);
+    margin-right: 50px;
+}
