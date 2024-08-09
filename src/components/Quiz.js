@@ -2,11 +2,11 @@ import React from 'react'
 import Button from './Button'
 import he from 'he'
 import Background from './Background'
-import { useNavigate } from 'react-router-dom'
 
-export default function Quiz({ questions }) {
 
-    const navigate = useNavigate()
+export default function Quiz({ questions, startQuiz }) {
+
+    
     const [selectedAnswers, setSelectedAnswers] = React.useState(Array(questions.length).fill({
         answerIndex: '',
         text: ''
@@ -25,7 +25,18 @@ export default function Quiz({ questions }) {
         })
     }
 
-    
+    const resetQuiz = async () => {
+        await startQuiz()
+        setDisplayResults(false)
+        setTotalPoints(0)
+        
+        setSelectedAnswers(Array(questions.length).fill({
+            answerIndex: '',
+            text: ''
+        }))
+        
+    }
+
     function verifyAnswers() {
         if (!displayResults) {
             for (let index = 0; index < questions.length; index++) {
@@ -33,13 +44,9 @@ export default function Quiz({ questions }) {
             }
             setDisplayResults(true)
         } else {
-          
-            navigate('/')
-
+            resetQuiz()
         }
     }
-
-    // style={{backgroundColor: isSelected ? 'rgba(214, 219, 245, 1)' : 'rgba(245, 247, 251, 1)'}}
 
     const myQuestions = questions.map((question, questionIndex) => {
         const answerArray = [...question.incorrect_answers, question.correct_answer]
@@ -101,7 +108,7 @@ export default function Quiz({ questions }) {
                         width: "120px",
                         height: "35px",
                         fontSize: "10px",
-                        marginTop: displayResults ? '' : '60px'
+                        marginTop: displayResults ? '' : '10px'
                     }}
                     onClick={verifyAnswers}     
                 />

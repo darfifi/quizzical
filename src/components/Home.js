@@ -4,11 +4,19 @@ import Background from './Background';
 import { useNavigate } from 'react-router-dom'
 
 
-export default function Home({ setQuestions }) {
 
-    const navigate = useNavigate();
+export default function Home({ startQuiz }) {
+
+    const navigate = useNavigate()
 
     
+    const handleStartQuiz = async () => {
+        await startQuiz();
+        navigate('/quizzes')
+    }
+
+
+    /*
     function startQuiz() {
         fetch('https://opentdb.com/api.php?amount=5')
           .then(res => res.json())
@@ -16,8 +24,8 @@ export default function Home({ setQuestions }) {
             setQuestions(data.results);
             navigate('/quizzes')
         })
-      }
-    
+    }
+    */
     
     return (
         <Background>
@@ -30,7 +38,7 @@ export default function Home({ setQuestions }) {
                 height: "52px",
                 fontSize: "16px"
               }}
-              onClick={startQuiz}        
+              onClick={handleStartQuiz}        
             />
         </Background>
     )
