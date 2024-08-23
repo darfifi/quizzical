@@ -4,86 +4,100 @@ import he from 'he'
 import Background from './Background'
 
 
-export default function Quiz({ questions, startQuiz }) {
-
-    
-    const [selectedAnswers, setSelectedAnswers] = React.useState(Array(questions.length).fill({
+export default function Quiz({ questionsAndAnswers, startQuiz }) {
+     
+    const [selectedAnswers, setSelectedAnswers] = React.useState(Array(questionsAndAnswers.questions.length).fill({
         answerIndex: '',
         text: ''
     }))
     const [displayResults, setDisplayResults] = React.useState(false)
     const [totalPoints, setTotalPoints] = React.useState(0)
     
-    function handleClick(questionIndex, answerIndex, answerArray) {
+
+
+
+
+
+
+    function handleClick(questionIndex, answerIndex) {
         setSelectedAnswers(prevSelectedAnswers => {
             const newSelectedAnmswers = [...prevSelectedAnswers]
             newSelectedAnmswers[questionIndex] = {
                 answerIndex: answerIndex, 
-                text: he.decode(answerArray[answerIndex])
+                text: questionsAndAnswers.answers[questionIndex][answerIndex]
             }
             return newSelectedAnmswers
         })
     }
 
+
+
+
+
+
+
+
+
+    // Definition of the function to reset the previous quiz and to load another one
+
     const resetQuiz = async () => {
         await startQuiz()
         setDisplayResults(false)
         setTotalPoints(0)
-        
-        setSelectedAnswers(Array(questions.length).fill({
+        setSelectedAnswers(Array(questionsAndAnswers.questions.length).fill({
             answerIndex: '',
             text: ''
-        }))
-        
+        }))  
     }
 
-    function verifyAnswers() {
+    // Function with double function according to the status of displayResults
+
+    function verifyOrReset() {
         if (!displayResults) {
-            for (let index = 0; index < questions.length; index++) {
-                selectedAnswers[index].text === he.decode(questions[index].correct_answer) ? setTotalPoints(prevValue => prevValue + 20): setTotalPoints(prevValue => prevValue)       
+            let points = 0
+            for (let index = 0; index < questionsAndAnswers.questions.length; index++) {
+                if (selectedAnswers[index].text === he.decode(questionsAndAnswers.questions[index].correct_answer)) {
+                    points += 20
+                }       
             }
+            setTotalPoints(points)
             setDisplayResults(true)
         } else {
             resetQuiz()
         }
     }
 
-    const myQuestions = questions.map((question, questionIndex) => {
-        const answerArray = [...question.incorrect_answers, question.correct_answer]
-        const myAnswers = answerArray.map((answer, answerIndex) => {
+    const myQuestions = questionsAndAnswers.questions.map((question, questionIndex) => {
+        const myAnswers = questionsAndAnswers.answers[questionIndex].map((answer, answerIndex) => {
             const isSelected = selectedAnswers[questionIndex].answerIndex === answerIndex
-            
-
+           
             const styleMaster = () => {
-
                 if (!displayResults) {
                     if (isSelected) {
                         return 'rgba(214, 219, 245, 1)'
                     }
                 } else {
-                    if (isSelected && selectedAnswers[questionIndex].text === he.decode(questions[questionIndex].correct_answer) || he.decode(answer) === he.decode(question.correct_answer)) {
+                    if ((isSelected && selectedAnswers[questionIndex].text === questionsAndAnswers.questions[questionIndex].correct_answer) || answer === question.correct_answer) {
                         return 'rgba(148, 215, 162, 1)'
-                    } else if (isSelected && !(selectedAnswers[questionIndex].text === he.decode(questions[questionIndex].correct_answer))) {
+                    } else if (isSelected && !(selectedAnswers[questionIndex].text === questionsAndAnswers.questions[questionIndex].correct_answer)) {
                         return 'rgba(248, 188, 188, 1)'
                     }
                 }
             } 
             
-            // Return del map sulle answers
-
-
+            // Return of map on the answers
 
             return (
                 <div 
                     className='answer'
-                    onClick={() => handleClick(questionIndex, answerIndex, answerArray)} 
+                    onClick={() => handleClick(questionIndex, answerIndex, questionsAndAnswers.answers[questionIndex])} 
                     style={{backgroundColor: styleMaster()}}>
                         {he.decode(answer)}
                 </div>
             )
         })
 
-        // Return del map sulle questions
+        // Return of map on the questions
 
         return (
             <div className='question--container'>
@@ -95,11 +109,11 @@ export default function Quiz({ questions, startQuiz }) {
         )
       })
     
-    // Return del componente Quiz()
+    // Return of the Quiz() component
 
     return (
         <Background>
-            {myQuestions}
+           {myQuestions}
             <div className="display--results">
                 {displayResults ? <p className='result'>You scored {totalPoints} points!</p> : ''}
                 <Button 
@@ -110,7 +124,7 @@ export default function Quiz({ questions, startQuiz }) {
                         fontSize: "10px",
                         marginTop: displayResults ? '' : '10px'
                     }}
-                    onClick={verifyAnswers}     
+                    onClick={verifyOrReset}     
                 />
             </div>
         </Background>    

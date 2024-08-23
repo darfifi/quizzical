@@ -1,70 +1,30 @@
-# Getting Started with Create React App
+GENERAL DESCRIPTION AND INFORMATION
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project consists in a web app that wants to simulate a quiz game. 
+Every card has 5 quizzes with multiple possible answers. 
+Data is retrived from an external server (Open Trivia Database). The following path is for the access to the database
 
-## Available Scripts
+https://opentdb.com/api_config.php
 
-In the project directory, you can run:
+The UI has been taken from figma.com 
 
-### `npm start`
+For this project the library React.js was used with the following main features:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- useState
+- he package
+- BrowserRouter
+- useNavigate
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This App is the result of an intermediate level of knowledge of React.js
 
-### `npm test`
+STRUCTURE OF THE PROJECT
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The App consists of two pages:
 
-### `npm run build`
+- a first page (when the app is run) where we can find the title of the app, a brief description and a button that can start the fetching process to retrieve the first set of questions from the database. The amount of questions is fixed at 5.
+![Here below an image of the first page of the app](./images/Readme-first page.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- After the pressing of the Start Button, and after the background process of fetching questions from the server the App lands on the secon page, the main component Quiz.js, that will be rendered with the five questions retrieved from the server and relative answers.
+The player has now the possibility of selecting the answer he prefers for each question and then he can start the verification process clicking on the Check Answers Button. At the click on the Check Answers Button a function will be launched to verify all the answers selected by the player with the correct answers retrieved from the server. Every correct answer selected by the player will increment the score of 20 points for a maximum score of 100 points for all 5 questions guessed. 

@@ -32,7 +32,7 @@
     margin-bottom: 7px;
 }
 
-.main--page--free--text {
+.main--page--free--text, .loading {
     color: rgba(41, 50, 100, 1);
     font-family: "Inter";
     font-weight: 400;
